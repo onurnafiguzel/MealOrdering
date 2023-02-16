@@ -1,16 +1,17 @@
 ﻿@page "/buttontest"
 @page "/buttons"
 
-<h3>ButtonTest</h3>
+
+<h3>@title</h3>
 
 <div class="form-group">
     <div class="container">
         <div class="btn-toolbar">
 
-            <CustomEditButtonComponent OnClick="changeTitle" />
-
-            <CustomEditButtonComponent Caption="Edit Caption" Color="danger" Icon="pencil" IsSmall="false" />
-
+            <CustomEditButtonComponent Caption="ShowMessage" OnClick="changeTitle" />
+            <br />
+            <CustomEditButtonComponent Caption="Edit Caption" OnClick="ShowConfirmation" Color="danger" Icon="pencil" IsSmall="false" />
+            <br />
             <AddNewButtonComponent />
 
         </div>
@@ -22,13 +23,22 @@
     [CascadingParameter]
     IModalService Modal { get; set; }
 
+    [Inject]
+    ModalManager ModalManager { get; set; }
+
     private string title = "";
 
-    private void changeTitle()
+    private async Task changeTitle()
     {
-        ModalParameters mParams = new ModalParameters();
-        mParams.Add("Message", "Bu bir test popup denemesidir.");
+        await ModalManager.ShowMessageAsync("Show Message Title", "Record will be deleted!", 3000);
+    }
 
-        Modal.Show<ShowMessagePopupComponent>("Counter Popop Page", mParams);
+    private async Task ShowConfirmation()
+    {
+        var result = await ModalManager.ConfirmationAsync("Confirmations", "R u sure that it will be deleted?");
+
+        if (result) title = "Yes just clicked";
+        else title = "No just clicked";
+
     }
 }
