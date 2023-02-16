@@ -9,9 +9,9 @@
 
             <CustomEditButtonComponent OnClick="changeTitle" />
 
-            <CustomEditButtonComponent Caption="Edit Caption"  Color="danger" Icon="pencil" IsSmall="false" />
+            <CustomEditButtonComponent Caption="Edit Caption" Color="danger" Icon="pencil" IsSmall="false" />
 
-            <AddNewButtonComponent />            
+            <AddNewButtonComponent />
 
         </div>
     </div>
@@ -26,6 +26,9 @@
 
     private void changeTitle()
     {
-        Modal.Show<Counter>("Counter Popop Page");
+        ModalParameters mParams = new ModalParameters();
+        mParams.Add("Message", "Bu bir test popup denemesidir.");
+
+        Modal.Show<ShowMessagePopupComponent>("Counter Popop Page", mParams);
     }
 }
