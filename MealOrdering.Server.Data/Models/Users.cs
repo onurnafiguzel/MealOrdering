@@ -10,7 +10,7 @@ namespace MealOrdering.Server.Data.Models
         public DateTime CreateDate { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string EmailAddress { get; set; }
+        public string EMailAddress { get; set; }
         public bool IsActive { get; set; }
 
     }

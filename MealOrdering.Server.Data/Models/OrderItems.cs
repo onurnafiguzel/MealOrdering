@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MealOrdering.Server.Data.Models
 {
-    public class OrdersItem
+    public class OrderItems
     {
         public Guid Id { get; set; }
         public DateTime CreateDate { get; set; }
