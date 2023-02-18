@@ -11,5 +11,8 @@ namespace MealOrdering.Server.Data.Models
         public Guid CreatedUserId { get; set; }
         public Guid OrderId { get; set; }
         public string Description { get; set; }
+
+        public virtual Users CreatedUser { get; set; }
+        public virtual Orders Order { get; set; }
     }
 }

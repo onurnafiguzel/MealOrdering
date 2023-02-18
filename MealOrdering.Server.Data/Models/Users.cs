@@ -12,6 +12,9 @@ namespace MealOrdering.Server.Data.Models
         public string LastName { get; set; }
         public string EMailAddress { get; set; }
         public bool IsActive { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<OrderItems> CreatedOrderItems { get; set; }
+
 
     }
 }

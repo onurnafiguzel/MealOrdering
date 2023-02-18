@@ -28,8 +28,7 @@ namespace MealOrdering.Server.Data.Context
                 entity.Property(i => i.FirstName).HasColumnName("first_name").HasColumnType("character varying").HasMaxLength(100);
                 entity.Property(i => i.LastName).HasColumnName("last_name").HasColumnType("character varying").HasMaxLength(100);
                 entity.Property(i => i.EMailAddress).HasColumnName("email_address").HasColumnType("character varying").HasMaxLength(100);
-                entity.Property(i => i.Password).HasColumnName("password").HasColumnType("character varying").HasMaxLength(250);
-
+               
                 entity.Property(i => i.CreateDate).HasColumnName("create_date").HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("NOW()");
 
@@ -69,7 +68,7 @@ namespace MealOrdering.Server.Data.Context
                 entity.Property(e => e.SupplierId).HasColumnName("supplier_id").HasColumnType("uuid").IsRequired().ValueGeneratedNever();
                 entity.Property(e => e.ExpireDate).HasColumnName("expire_date").HasColumnType("timestamp without time zone").IsRequired();
 
-                entity.HasOne(d => d.CreatedUser)
+                entity.HasOne(d => d.CreateUser)
                    .WithMany(p => p.Orders)
                    .HasForeignKey(d => d.CreatedUserId)
                    .HasConstraintName("fk_user_order_id")
@@ -95,7 +94,6 @@ namespace MealOrdering.Server.Data.Context
                 entity.Property(e => e.CreateDate).HasColumnName("createdate").HasColumnType("timestamp without time zone").HasDefaultValueSql("NOW()");
                 entity.Property(e => e.CreatedUserId).HasColumnName("created_user_id").HasColumnType("uuid");
                 entity.Property(e => e.OrderId).HasColumnName("order_id").HasColumnType("uuid");
-
 
                 entity.HasOne(d => d.Order)
                    .WithMany(p => p.OrderItems)
