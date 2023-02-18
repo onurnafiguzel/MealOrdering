@@ -18,7 +18,9 @@ namespace MealOrdering.Server.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Users>(entity => 
+            modelBuilder.HasDefaultSchema("public");
+
+            modelBuilder.Entity<Users>(entity =>
             {
                 entity.ToTable("user", "public");
 
@@ -28,7 +30,7 @@ namespace MealOrdering.Server.Data.Context
                 entity.Property(i => i.FirstName).HasColumnName("first_name").HasColumnType("character varying").HasMaxLength(100);
                 entity.Property(i => i.LastName).HasColumnName("last_name").HasColumnType("character varying").HasMaxLength(100);
                 entity.Property(i => i.EMailAddress).HasColumnName("email_address").HasColumnType("character varying").HasMaxLength(100);
-               
+
                 entity.Property(i => i.CreateDate).HasColumnName("create_date").HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("NOW()");
 
