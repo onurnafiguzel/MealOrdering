@@ -70,7 +70,7 @@ namespace MealOrdering.Server.Data.Context
                 entity.Property(e => e.SupplierId).HasColumnName("supplier_id").HasColumnType("uuid").IsRequired().ValueGeneratedNever();
                 entity.Property(e => e.ExpireDate).HasColumnName("expire_date").HasColumnType("timestamp without time zone").IsRequired();
 
-                entity.HasOne(d => d.CreateUser)
+                entity.HasOne(d => d.CreatedUser)
                    .WithMany(p => p.Orders)
                    .HasForeignKey(d => d.CreatedUserId)
                    .HasConstraintName("fk_user_order_id")
