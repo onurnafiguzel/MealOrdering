@@ -1,4 +1,5 @@
 using Blazored.Modal;
+using MealOrdering.Server.Services.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,8 @@ namespace MealOrdering.Server
             services.AddRazorPages();
 
             services.AddBlazoredModal();
+
+            services.ConfigureMapping();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

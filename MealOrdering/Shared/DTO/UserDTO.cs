@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MealOrdering.Server.Data.Models
+namespace MealOrdering.Shared.DTO
 {
     public class UserDTO
     {

@@ -13,7 +13,7 @@ namespace MealOrdering.Server.Data.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime ExpireDate { get; set; }
-        public virtual Users CreateUser  { get; set; }
+        public virtual Users CreatedUser  { get; set; }
         public virtual Suppliers Supplier { get; set; }
         public virtual ICollection<OrderItems> OrderItems { get; set; }
     }
