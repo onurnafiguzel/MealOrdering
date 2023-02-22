@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealOrdering.Client", "Meal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealOrdering.Shared", "MealOrdering\Shared\MealOrdering.Shared.csproj", "{6ECDBD77-9CAF-425B-B3D9-F6445BB1DEE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealOrdering.Server.Data", "MealOrdering.Server.Data\MealOrdering.Server.Data.csproj", "{7667B0C5-5A9B-443C-B960-77EEA9B245EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealOrdering.Server.Data", "MealOrdering.Server.Data\MealOrdering.Server.Data.csproj", "{7667B0C5-5A9B-443C-B960-77EEA9B245EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
