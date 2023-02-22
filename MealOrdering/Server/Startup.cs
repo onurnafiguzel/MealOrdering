@@ -1,4 +1,5 @@
 using Blazored.Modal;
+using MealOrdering.Server.Data.Context;
 using MealOrdering.Server.Services.Extensions;
 using MealOrdering.Server.Services.Infrastructure;
 using MealOrdering.Server.Services.Services;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -35,6 +37,12 @@ namespace MealOrdering.Server
             services.ConfigureMapping();
 
             services.AddScoped<IUserService, UserService>();
+
+            services.AddDbContext<MealOrderingDbContext>(config =>
+            {
+                config.UseNpgsql("User ID=postgres;password=123456;Host=localhost;Port=5432;Database=postgres;SearchPath=public");
+                config.EnableSensitiveDataLogging();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
