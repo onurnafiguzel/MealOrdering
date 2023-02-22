@@ -8,7 +8,7 @@ namespace MealOrdering.Server.Services.Infrastructure
 {
     public interface IUserService
     {
-        public Task<UserDTO> GetUserById(Guid guid);
+        public Task<UserDTO> GetUserById(Guid id);
         public Task<List<UserDTO>> GetUsers();
         public Task<UserDTO> CreateUser(UserDTO user);
         public Task<UserDTO> UpdateUser(UserDTO user);
