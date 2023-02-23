@@ -10,9 +10,9 @@ namespace MealOrdering.Server.Services.Infrastructure
     {
         public Task<List<SupplierDTO>> GetSuppliers();
 
-        public Task<SupplierDTO> CreateSupplier(SupplierDTO Order);
+        public Task<SupplierDTO> CreateSupplier(SupplierDTO supplier);
 
-        public Task<SupplierDTO> UpdateSupplier(SupplierDTO Order);
+        public Task<SupplierDTO> UpdateSupplier(SupplierDTO supplier);
 
         public Task DeleteSupplier(Guid SupplierId);
 
