@@ -15,7 +15,7 @@ namespace MealOrdering.Client.Pages.Users
         [Inject]
         public HttpClient client { get; set; }
 
-        protected List<UserDTO> userList = new List<UserDTO>();
+        protected List<UserDTO> UserList = new List<UserDTO>();
 
         protected async override Task OnInitializedAsync()
         {
@@ -28,7 +28,7 @@ namespace MealOrdering.Client.Pages.Users
 
             if (serviceResponse.Success)
             {
-                userList = serviceResponse.Value;
+                UserList = serviceResponse.Value;
             }
         }
 
