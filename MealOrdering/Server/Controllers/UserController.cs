@@ -23,11 +23,11 @@ namespace MealOrdering.Server.Controllers
 
 
         [HttpGet("Login")]
-        public ServiceResponse<string> Login(string Email, string Password)
+        public async Task<ServiceResponse<String>> Login(string Email, string Password)
         {
             return new ServiceResponse<string>()
             {
-                Value = userService.Login(Email, Password)
+                Value = await userService.LoginAsync(Email, Password)
             };
 
         }

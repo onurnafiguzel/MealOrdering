@@ -13,6 +13,6 @@ namespace MealOrdering.Server.Services.Infrastructure
         public Task<UserDTO> CreateUser(UserDTO user);
         public Task<UserDTO> UpdateUser(UserDTO user);
         public Task<bool> DeleteUserById(Guid Id);
-        public string Login(string Email, string Password);
+        public Task<string> LoginAsync(string Email, string Password);
     }
 }

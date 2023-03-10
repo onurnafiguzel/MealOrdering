@@ -4,6 +4,7 @@ using MealOrdering.Server.Data.Context;
 using MealOrdering.Server.Data.Models;
 using MealOrdering.Server.Services.Infrastructure;
 using MealOrdering.Shared.DTO;
+using MealOrdering.Shared.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -74,9 +75,19 @@ namespace MealOrdering.Server.Services.Services
                          .ToListAsync();
         }
 
-        public string Login(string Email, string Password)
+        public async Task<string> LoginAsync(string Email, string Password)
         {
             // Database operations about veriy user
+
+            var encryptedPassword = PasswordEncrypter.Encrypt(Password);
+
+            var dbUser = await context.Users.FirstOrDefaultAsync(i => i.EMailAddress == Email && i.Password == encryptedPassword);
+
+            if (dbUser == null)
+                throw new Exception("Kullanıcı Bulunamadı veya Bilgiler Yanlış");
+
+            if (!dbUser.IsActive)
+                throw new Exception("Kullanıcı Pasif Durumdadır!");
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSecurityKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -84,12 +95,13 @@ namespace MealOrdering.Server.Services.Services
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.Email,Email)
+                new Claim(ClaimTypes.Email, Email),
+                new Claim(ClaimTypes.Name, dbUser.FirstName + " " + dbUser.LastName)
             };
 
             var token = new JwtSecurityToken(configuration["JwtIssuer"], configuration["JwtAudience"], claims, null, expiry, creds);
 
-            string tokenStr = new JwtSecurityTokenHandler().WriteToken(token);
+            String tokenStr = new JwtSecurityTokenHandler().WriteToken(token);
             return tokenStr;
         }
 
