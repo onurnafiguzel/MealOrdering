@@ -75,7 +75,7 @@ namespace MealOrdering.Server.Services.Services
                          .ToListAsync();
         }
 
-        public async Task<string> LoginAsync(string Email, string Password)
+        public async Task<UserLoginResponseDTO> Login(string Email, string Password)
         {
             // Database operations about veriy user
 
@@ -89,6 +89,8 @@ namespace MealOrdering.Server.Services.Services
             if (!dbUser.IsActive)
                 throw new Exception("Kullanıcı Pasif Durumdadır!");
 
+            UserLoginResponseDTO result = new UserLoginResponseDTO();
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSecurityKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var expiry = DateTime.Now.AddDays(int.Parse(configuration["JwtExpiryInDays"].ToString()));
@@ -101,8 +103,10 @@ namespace MealOrdering.Server.Services.Services
 
             var token = new JwtSecurityToken(configuration["JwtIssuer"], configuration["JwtAudience"], claims, null, expiry, creds);
 
-            String tokenStr = new JwtSecurityTokenHandler().WriteToken(token);
-            return tokenStr;
+            result.ApiToken = new JwtSecurityTokenHandler().WriteToken(token);
+            result.User = mapper.Map<UserDTO>(dbUser);
+
+            return result;
         }
 
         public async Task<UserDTO> UpdateUser(UserDTO user)
