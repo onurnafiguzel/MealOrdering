@@ -17,9 +17,7 @@ namespace MealOrdering.Client.Utils
             {
                 var res = await httpRes.Content.ReadFromJsonAsync<ServiceResponse<TResult>>();
 
-                if (!!res.Success)
-
-                    return !res.Success && ThrowSuccessException ? throw new ApiException(res.Message) : res.Value;
+                return !res.Success && ThrowSuccessException ? throw new ApiException(res.Message) : res.Value;
             }
 
             throw new HttpException(httpRes.StatusCode.ToString());
