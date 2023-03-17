@@ -1,6 +1,7 @@
 using Blazored.LocalStorage;
 using Blazored.Modal;
 using MealOrdering.Server.Data.Context;
+using MealOrdering.Server.Middlewares;
 using MealOrdering.Server.Services.Extensions;
 using MealOrdering.Server.Services.Infrastructure;
 using MealOrdering.Server.Services.Services;
@@ -85,6 +86,8 @@ namespace MealOrdering.Server
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
