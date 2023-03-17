@@ -15,10 +15,10 @@ namespace MealOrdering.Client.Pages.Users
     public class UserListProcess : ComponentBase
     {
         [Inject]
-        public HttpClient client { get; set; }
+        public HttpClient Client { get; set; }
 
         [Inject]
-        ModalManager modalManager { get; set; }
+        ModalManager ModalManager { get; set; }
 
         protected List<UserDTO> UserList = new List<UserDTO>();
 
@@ -29,15 +29,17 @@ namespace MealOrdering.Client.Pages.Users
 
         protected async Task LoadList()
         {
-            //var serviceResponse = await client.GetFromJsonAsync<ServiceResponse<List<UserDTO>>>("api/User/Users");
-
             try
             {
-                UserList = await client.GetServiceResponse<List<UserDTO>>("api/User/Users", true);
+                UserList = await Client.GetServiceResponseAsync<List<UserDTO>>("api/User/Users", true);
             }
             catch (ApiException ex)
             {
-                await modalManager.ShowMessageAsync("Api Exception", ex.Message);
+                await ModalManager.ShowMessageAsync("Api Exception", ex.Message);
+            }
+            catch (Exception ex)
+            {
+                await ModalManager.ShowMessageAsync("Exception", ex.Message);
             }
         }
     }
