@@ -30,7 +30,9 @@ namespace MealOrdering.Server.Services.Extensions
             CreateMap<Suppliers, SupplierDTO>()
                 .ReverseMap();
 
-            CreateMap<Users, UserDTO>()
+            CreateMap<Users, UserDTO>();
+
+            CreateMap<UserDTO, Users>()
                 .ForMember(x => x.Password, y => y.MapFrom(z => PasswordEncrypter.Encrypt(z.Password)));
 
             CreateMap<Orders, OrderDTO>()
@@ -38,8 +40,6 @@ namespace MealOrdering.Server.Services.Extensions
                 .ForMember(x => x.CreatedUserFullName, y => y.MapFrom(z => z.CreatedUser.FirstName + " " + z.CreatedUser.LastName));
 
             CreateMap<OrderDTO, Orders>();
-
-
 
             CreateMap<OrderItems, OrderItemsDTO>()
                 .ForMember(x => x.CreatedUserFullName, y => y.MapFrom(z => z.CreatedUser.FirstName + " " + z.CreatedUser.LastName))
