@@ -35,7 +35,10 @@
                     <td>@user.EMailAddress</td>
                     <td>@user.CreateDate</td>
                     <td><span class="@spanClass">@(user.IsActive ? "Active" : "Passive")</span></td>
-                    <td><CustomEditButtonComponent IsSmall="true" Caption="" IsOutline="true" OnClick="@(()=> goUpdateUserPage(user.Id))" /></td>
+                    <td>
+                        <CustomEditButtonComponent IsSmall="true" Caption="" IsOutline="true" OnClick="@(()=> goUpdateUserPage(user.Id))" />
+                        <DeleteButtonComponent IsSmall="true" Caption="" IsOutline="true" OnClick="@(()=> DeleteUser(user.Id))" />
+                    </td>
 
                 </tr>
             }
