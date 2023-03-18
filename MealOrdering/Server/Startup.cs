@@ -42,6 +42,8 @@ namespace MealOrdering.Server
             services.ConfigureMapping();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<ISupplierService, SupplierService>();
 
             services.AddDbContext<MealOrderingDbContext>(config =>
             {
