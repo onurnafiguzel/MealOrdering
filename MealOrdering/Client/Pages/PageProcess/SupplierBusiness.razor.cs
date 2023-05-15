@@ -1,4 +1,4 @@
-﻿using Blazored.LocalStorage;
+﻿ using Blazored.LocalStorage;
 using MealOrdering.Client.Utils;
 using MealOrdering.Shared.CustomExceptions;
 using MealOrdering.Shared.DTO;
