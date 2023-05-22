@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace MealOrdering.Shared.DTO
 {
@@ -10,6 +9,8 @@ namespace MealOrdering.Shared.DTO
         public DateTime CreateDate { get; set; }
         public Guid CreatedUserId { get; set; }
         public Guid SupplierId { get; set; }
+        [MinLength(3)]
+        [StringLength(10)]
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime ExpireDate { get; set; }
