@@ -2,6 +2,7 @@
 using MealOrdering.Client.Utils;
 using MealOrdering.Shared.CustomExceptions;
 using MealOrdering.Shared.DTO;
+using MealOrdering.Shared.FilterModels;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,8 @@ namespace MealOrdering.Client.Pages.PageProcess
 
         [Inject]
         ModalManager ModalManager { get; set; }
+
+        public OrderListFilterModel filterModel = new OrderListFilterModel() { CreateDateFirst=DateTime.Now.Date, CreateDateLast=DateTime.Now.Date};
 
         protected List<OrderDTO> OrderList;
 
@@ -65,7 +68,7 @@ namespace MealOrdering.Client.Pages.PageProcess
 
             try
             {
-                OrderList = await Http.GetServiceResponseAsync<List<OrderDTO>>("api/Order/TodaysOrder", true);
+                OrderList = await Http.PostGetServiceResponseAsync<List<OrderDTO>, OrderListFilterModel>("api/Order/OrdersByFilter", filterModel, true);
             }
             catch (ApiException ex)
             {

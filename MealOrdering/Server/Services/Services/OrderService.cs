@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using MealOrdering.Server.Data.Context;
 using MealOrdering.Server.Services.Infrastructure;
 using MealOrdering.Shared.DTO;
+using MealOrdering.Shared.FilterModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -99,6 +100,27 @@ namespace MealOrdering.Server.Services.Services
             return await context.OrderItems.Include(i => i.Order).Where(i => i.Id == Id)
                      .ProjectTo<OrderItemsDTO>(mapper.ConfigurationProvider)
                      .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<OrderDTO>> GetOrdersByFilter(OrderListFilterModel Filter)
+        {
+            var query = context.Orders.Include(i => i.Supplier).AsQueryable();
+
+            if (Filter.CreatedUserId != Guid.Empty)
+                query = query.Where(i => i.CreatedUserId == Filter.CreatedUserId);
+
+            if (Filter.CreateDateFirst.HasValue)
+                query = query.Where(i => i.CreateDate >= Filter.CreateDateFirst);
+
+            if (Filter.CreateDateLast > DateTime.MinValue)
+                query = query.Where(i => i.CreateDate <= Filter.CreateDateLast);
+
+            var list = await query
+                      .ProjectTo<OrderDTO>(mapper.ConfigurationProvider)
+                      .OrderBy(i => i.CreateDate)
+                      .ToListAsync();
+
+            return list;
         }
 
         public async Task<List<OrderDTO>> GetOrders(DateTime OrderDate)

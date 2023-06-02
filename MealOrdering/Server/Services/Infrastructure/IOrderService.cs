@@ -1,4 +1,5 @@
 ﻿using MealOrdering.Shared.DTO;
+using MealOrdering.Shared.FilterModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace MealOrdering.Server.Services.Infrastructure
         public Task<OrderDTO> UpdateOrder(OrderDTO Order);
 
         public Task DeleteOrder(Guid OrderId);
+
+        public Task<List<OrderDTO>> GetOrdersByFilter(OrderListFilterModel Filter);
 
         public Task<List<OrderDTO>> GetOrders(DateTime OrderDate);
 

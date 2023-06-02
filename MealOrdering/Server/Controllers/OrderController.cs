@@ -1,5 +1,6 @@
 ﻿using MealOrdering.Server.Services.Infrastructure;
 using MealOrdering.Shared.DTO;
+using MealOrdering.Shared.FilterModels;
 using MealOrdering.Shared.ResponseModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -38,6 +39,15 @@ namespace MealOrdering.Server.Controllers
             return new ServiceResponse<List<OrderDTO>>()
             {
                 Value = await orderService.GetOrders(OrderDate)
+            };
+        }
+
+        [HttpPost("OrdersByFilter")]
+        public async Task<ServiceResponse<List<OrderDTO>>> GetOrdersByFilter([FromBody] OrderListFilterModel Filter)
+        {
+            return new ServiceResponse<List<OrderDTO>>()
+            {
+                Value = await orderService.GetOrdersByFilter(Filter)
             };
         }
 
