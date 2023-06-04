@@ -69,8 +69,11 @@
                 <td>@(IsExpired(order.ExpireDate) ? "Expired" : order.ExpireDate.GetRemaningDateStr())</td>              
                 <td>
                     <div class="btn-toolbar">
-                        <CustomEditButtonComponent IsSmall="true" IsOutline="true" Caption="" OnClick="(() => GoEditOrder(order.Id))" />
-                        <DeleteButtonComponent IsSmall="true" IsOutline="true" Caption="" OnClick="(() => DeleteOrder(order.Id))" />
+                        @if (IsMyOrder(order.CreatedUserId))
+                        {
+                            <CustomEditButtonComponent IsSmall="true" IsOutline="true" Caption="" OnClick="(() => GoEditOrder(order.Id))" />
+                            <DeleteButtonComponent IsSmall="true" IsOutline="true" Caption="" OnClick="(() => DeleteOrder(order.Id))" />
+                        }
                     </div>
                 </td>
             </tr>

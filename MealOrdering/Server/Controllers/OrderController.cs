@@ -119,6 +119,13 @@ namespace MealOrdering.Server.Controllers
             return new BaseResponse();
         }
 
+        [HttpGet("DeleteOrder/{OrderId}")]
+        public async Task<BaseResponse> DeleteOrderFromQueryString(Guid OrderId)
+        {
+            await orderService.DeleteOrder(OrderId);
+            return new BaseResponse();
+        }
+
         [HttpGet("OrderItems")]
         public async Task<ServiceResponse<List<OrderItemsDTO>>> GetOrderItems(Guid OrderId)
         {
